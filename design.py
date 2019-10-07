@@ -80,6 +80,7 @@ class Design:
         log("Adjust Valid :", self.Adjust_Valid())
         log("Variance Table :", self.variance_table)
         log("Covariance Table :", self.covariance_table)
+        log("Residuos :", self.residuos)
 
     # method to check if the regression is valid
     def Regression_Valid(self, *args):
@@ -528,6 +529,10 @@ class Design:
     def plot(self, sampled_values = True, sample_size = 50.0, original_values = True, residuos = False):
         # ger pyplot figure
         #figure = plt.figure()
+        # check there is 2 coordinates 1 for independent and 1 for dependent
+        if self.number_of_independent_variables != 1:
+            # then cancel plot method
+            return
 
         # check with use sample values
         if sampled_values:
