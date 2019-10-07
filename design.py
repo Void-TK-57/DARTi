@@ -150,15 +150,15 @@ class Design:
 
     # method to calculate minimum and maximum interval for the confidence
     def Calculate_Interval_Values(self, independent_values):
-        # get independent values coefficients
         coefficients = independent_values[0, :].flatten()
-        # get standard derivation
         standards = independent_values[1, :].flatten()
-        # get t degree of freedom
+        # calculat t degree of freedom
         dg = len(self.dependent_value.index) - 2
+        # change confiance to 2 tails version for the t distributuion
+        confiance_interval = 1.0 - (1.0 - self.confiance_interval)/2.0
         # get t coefficient
-        t = sts.t.ppf(self.confiance_interval, dg)
-        # min interval
+        t = sts.t.ppf(confiance_interval, dg)
+        # get min and max interval by using the formula: coefficient +- T*std
         min_interval = np.minimum(coefficients - t*standards, coefficients + t*standards)
         max_interval = np.maximum(coefficients - t*standards, coefficients + t*standards)
         # return list of the interval
