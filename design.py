@@ -616,9 +616,9 @@ class Design:
 class Factorial_Design(Design):
     
     # constructor
-    def __init__(self, independent_values, dependent_value, max_min_table = None, confiance_interval = 0.95):
+    def __init__(self, independent_values, dependent_value, max_min_table = None, confiance_interval = 0.95, *args, **kwargs):
         # call parent constructor
-        super().__init__(independent_values, dependent_value, max_min_table, confiance_interval=confiance_interval)
+        super().__init__(independent_values, dependent_value, max_min_table, confiance_interval=confiance_interval, *args, **kwargs)
 
     # method to expand the independent values
     def Expand_Independent_Values(self, coded_values):
@@ -1401,20 +1401,8 @@ def regression_test():
     pd_y = pd.DataFrame(y1, columns = ["Y",])
     pd_m = pd.DataFrame(m, columns = ["X",])
 
-    doe = Design(pd_x, pd_y, pd_m, 0.975, 1)
+    doe = Design(pd_x, pd_y, pd_m, 0.95, 1, use_log = True)
 
-    log("Independent Values :", doe.independent_values)
-    log("Degree :", doe.degree)
-    log("Coded Independent Values :", doe.coded_independent_values)
-    log("Expanded Coded Independent Values :", doe.expanded_coded_independent_values)
-    log("Dependent Values :", doe.dependent_value)
-    log("Dependent Values Calculated :", doe.dependent_value_calculated)
-    log("Dependent Value per Level :", doe.dependent_value_per_level)
-    log("Residuos :", doe.residuos)
-    log("Variance Table :", doe.variance_table)
-    log("Variance Statistics Table :", doe.statistics_variance_table)
-    log("Covariance Table :", doe.covariance_table)
-    log("Coefficients :", doe.coefficients)
     doe.plot()
     doe.error_plot(False, False)
     doe.error_plot(True, False)
