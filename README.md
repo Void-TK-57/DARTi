@@ -1,2 +1,2 @@
-# LPQA
-LPQA's Respository for tests
+# DARTi
+DARTi's Repository for tests
